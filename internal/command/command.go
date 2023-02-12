@@ -31,7 +31,6 @@ func (c *Executor) ExecutingCommand(ctx context.Context, cmd string, os string, 
 	command.Stdin = strings.NewReader(stdin)
 	command.Stdout = stdout
 	command.Stderr = stderr
-	fmt.Println(args)
 	err := command.Run()
 	if err != nil {
 		return Result{}, fmt.Errorf("execute command: %w", err)
@@ -52,12 +51,6 @@ func (c *Executor) checkOS(os string) error {
 }
 
 func (c *Executor) parseArgs(cmd string) (string, []string) {
-	// TODO;
-	//df -h
-	//cat  “file name”
-	//cat file\ name
-	//cat “r\t.txt”
-	// "echo   “an old falcon”"
 	s := strings.Fields(cmd)
 	cmd = s[0]
 	s = s[1:]

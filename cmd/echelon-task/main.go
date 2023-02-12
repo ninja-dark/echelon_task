@@ -9,6 +9,7 @@ import (
 	"os/signal"
 
 	"github.com/ninja-dark/echelon_task/internal/command"
+	"github.com/ninja-dark/echelon_task/internal/config"
 
 	"github.com/ninja-dark/echelon_task/internal/infrastructure/api/handler"
 	"github.com/ninja-dark/echelon_task/internal/infrastructure/api/router"
@@ -27,16 +28,16 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 
-	//cfg, err := config.Read()
-	//if err != nil {
-	//	logger.Sugar().Fatalf("Cannot load config, due to error: %s", err.Error())
-	//}
+	cfg, err := config.Read()
+	if err != nil {
+		logger.Sugar().Fatalf("Cannot load config, due to error: %s", err.Error())
+	}
 
 	l := command.NewExecutor()
 	hs := handler.NewHandler(l)
 	rt := router.NewRouter(hs)
-	logger.Sugar().Infof("Starting Gateway server on port:%s", ":8080")
-	srv := server.NewServer(":8080", rt, logger)
+	logger.Sugar().Infof("Starting Gateway server on port:%s", cfg.Addr)
+	srv := server.NewServer(cfg.Addr, rt, logger)
 
 	if err := srv.Start(ctx); err != nil {
 		if !errors.Is(err, http.ErrServerClosed) {

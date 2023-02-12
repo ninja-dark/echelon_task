@@ -38,5 +38,5 @@ func (s *Server) Start(ctx context.Context) error {
 		}
 	}()
 
-	return s.srv.ListenAndServeTLS("../../tls/cert.pem", "../../tls/key.pem")
+	return s.srv.ListenAndServeTLS("tls/cert.pem", "tls/key.pem")
 }

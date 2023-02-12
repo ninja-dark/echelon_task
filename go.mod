@@ -2,7 +2,10 @@ module github.com/ninja-dark/echelon_task
 
 go 1.18
 
-require go.uber.org/zap v1.24.0
+require (
+	github.com/go-playground/assert/v2 v2.0.1
+	go.uber.org/zap v1.24.0
+)
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
