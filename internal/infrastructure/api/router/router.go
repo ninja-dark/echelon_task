@@ -1,8 +1,8 @@
 package router
 
 import (
-	"net/http"
 	"github.com/ninja-dark/echelon_task/internal/infrastructure/api/handler"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )

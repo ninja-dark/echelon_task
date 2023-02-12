@@ -31,13 +31,12 @@ func main() {
 	//if err != nil {
 	//	logger.Sugar().Fatalf("Cannot load config, due to error: %s", err.Error())
 	//}
-	
+
 	l := command.NewExecutor()
 	hs := handler.NewHandler(l)
 	rt := router.NewRouter(hs)
 	logger.Sugar().Infof("Starting Gateway server on port:%s", ":8080")
 	srv := server.NewServer(":8080", rt, logger)
-	
 
 	if err := srv.Start(ctx); err != nil {
 		if !errors.Is(err, http.ErrServerClosed) {
